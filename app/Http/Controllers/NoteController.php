@@ -114,10 +114,15 @@ class NoteController extends Controller
     public function show(Note $note)
     {
         $note->load(['user', 'category', 'tags', 'files', 'comments.user']);
-        
-        // Increment views
+
+        if ($note->visibility !== 'public' && auth()->id() !== $note->user_id) {
+            if ($note->visibility === 'private' || ! auth()->user()->isFollowing($note->user)) {
+                abort(403, 'This note is not available.');
+            }
+        }
+
         $note->increment('views_count');
-        
+
         return view('notes.show', compact('note'));
     }
 
@@ -126,7 +131,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        // Add authorization check later
+        abort_unless(auth()->id() === $note->user_id, 403);
+
         $categories = Category::orderBy('name')->get();
         return view('notes.edit', compact('note', 'categories'));
     }
@@ -136,7 +142,7 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        if (auth()->id() !== $note->user_id) abort(403);
+        abort_unless(auth()->id() === $note->user_id, 403);
 
         $validated = $request->validate([
             'title'       => 'required|string|max:255',
@@ -155,7 +161,7 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        if (auth()->id() !== $note->user_id) abort(403);
+        abort_unless(auth()->id() === $note->user_id, 403);
 
         $note->delete();
 

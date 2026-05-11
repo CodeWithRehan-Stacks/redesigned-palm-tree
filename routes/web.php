@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     
     // Main Feed Dashboard
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home/feed', [HomeController::class, 'feed'])->name('home.feed');
     
     // Notes System
     Route::resource('notes', App\Http\Controllers\NoteController::class);

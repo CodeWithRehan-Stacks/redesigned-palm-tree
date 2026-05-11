@@ -41,7 +41,7 @@
     </form>
 
     <!-- Right Actions -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-right gap-5">
 
         <!-- Notifications -->
         <div x-data="{ open: false }" class="relative">
@@ -159,13 +159,7 @@
                     My Notes
                 </a>
 
-                @if(auth()->user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}"
-                       class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-sn-600 hover:bg-sn-50 dark:text-sn-400 dark:hover:bg-sn-900/20 transition-colors">
-                        <span class="material-symbols-rounded text-[18px]">dashboard_customize</span>
-                        Admin Dashboard
-                    </a>
-                @endif
+          
 
                 <div class="h-px bg-slate-100 dark:bg-slate-800 my-1"></div>
 

@@ -2,225 +2,207 @@
 @section('title', 'Home Feed')
 
 @section('content')
-<div class="flex gap-8 pt-2">
+<div class="space-y-6">
 
-    {{-- ── MAIN FEED ─────────────────────────────────────────── --}}
-    <div class="flex-1 max-w-[600px] w-full">
+    {{-- Hero Section --}}
+    <section class="relative overflow-hidden rounded-[2rem] border border-slate-200/70 dark:border-slate-800 bg-white/80 dark:bg-[#0d1117]/80 backdrop-blur-xl shadow-[0_10px_60px_rgba(0,0,0,0.06)]">
 
-        {{-- Compose Bar --}}
-        <div class="card-p mb-6">
-            <div class="flex items-start gap-3">
-                <a href="{{ route('profile.show', auth()->user()->username) }}" class="flex-shrink-0">
-                    <img src="{{ auth()->user()->profile_picture ? Storage::url(auth()->user()->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name).'&background=BBD5DA&color=1A3A3E&size=64' }}"
-                         class="avatar-md flex-shrink-0">
-                </a>
-                <div class="flex-1">
-                    <textarea class="w-full bg-transparent border-none focus:ring-0 resize-none text-[15px]
-                                     placeholder:text-slate-400 text-slate-900 dark:text-white min-h-[52px] p-0 leading-relaxed"
-                              rows="2"
-                              placeholder="Share a note, ask a question, start a discussion…"></textarea>
-                    <div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
-                        <div class="flex items-center gap-1 text-slate-400">
-                            <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg hover:text-sn-600 transition-colors" title="Image">
-                                <span class="material-symbols-rounded text-[20px]">image</span>
-                            </button>
-                            <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg hover:text-sn-600 transition-colors" title="Attach file">
-                                <span class="material-symbols-rounded text-[20px]">attach_file</span>
-                            </button>
-                            <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg hover:text-sn-600 transition-colors" title="Add tag">
-                                <span class="material-symbols-rounded text-[20px]">tag</span>
-                            </button>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <a href="{{ route('notes.create') }}" class="text-sm text-sn-600 hover:text-sn-700 font-medium dark:text-sn-300">
-                                Full editor
-                            </a>
-                            <button class="btn-primary py-2 px-5 text-sm rounded-xl">Post</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {{-- Background Glow --}}
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-20 -left-10 w-72 h-72 bg-[#5C919A]/20 blur-3xl rounded-full"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-[#9FBFC5]/20 blur-3xl rounded-full"></div>
         </div>
 
-        {{-- Feed Tabs --}}
-        <div class="flex items-center border-b border-slate-200 dark:border-slate-800 mb-4">
-            <a href="{{ route('home', ['feed' => 'trending']) }}" 
-               class="px-1 py-3 mr-6 text-sm font-semibold {{ $feed === 'trending' ? 'text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-white' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 border-b-2 border-transparent' }}">
-                For You
-            </a>
-            <a href="{{ route('home', ['feed' => 'following']) }}" 
-               class="px-1 py-3 mr-6 text-sm font-semibold {{ $feed === 'following' ? 'text-slate-900 dark:text-white border-b-2 border-slate-900 dark:border-white' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 border-b-2 border-transparent' }}">
-                Following
-            </a>
-        </div>
+        <div class="relative p-6 lg:p-10">
+            <div class="grid gap-8 lg:grid-cols-[1.8fr_1fr] items-start">
 
-        {{-- Feed Items --}}
-        <div class="space-y-3">
-            @forelse($notes as $note)
-                <article class="feed-card group">
-                    <div class="p-5">
-                        {{-- Author row --}}
-                        <div class="flex items-start justify-between mb-3">
-                            <div class="flex items-center gap-3">
-                                <a href="{{ route('profile.show', $note->user->username) }}">
-                                    <img src="{{ $note->user->profile_picture ? Storage::url($note->user->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode($note->user->name).'&background=DFF1F1&color=1A3A3E&size=64' }}"
-                                         class="avatar-md">
-                                </a>
-                                <div>
-                                    <div class="flex items-center gap-1">
-                                        <a href="{{ route('profile.show', $note->user->username) }}"
-                                           class="text-[15px] font-semibold text-slate-900 dark:text-white hover:underline">{{ $note->user->name }}</a>
-                                        @if($note->user->is_verified)
-                                            <span class="material-symbols-rounded text-[14px] text-sn-500" style="font-variation-settings: 'FILL' 1">verified</span>
-                                        @endif
-                                    </div>
-                                    <p class="text-[13px] text-slate-400">{{ '@' . $note->user->username }} · {{ $note->created_at->diffForHumans(null, true) }}</p>
-                                </div>
-                            </div>
-                            <button class="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
-                                <span class="material-symbols-rounded text-[18px]">more_horiz</span>
-                            </button>
-                        </div>
+                {{-- Left Content --}}
+                <div class="space-y-7">
 
-                        {{-- Category badge --}}
-                        <span class="badge-study text-[11px] mb-2 inline-flex">
-                            {{ $note->category ? $note->category->icon . ' ' . $note->category->name : '📄 General' }}
+                    {{-- Headline --}}
+                    <div class="space-y-4 max-w-3xl">
+                        <span class="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-white/5 px-4 py-2 text-xs font-semibold tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 backdrop-blur-xl">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Student-first study hub
                         </span>
 
-                        {{-- Note title and excerpt --}}
-                        <a href="{{ route('notes.show', $note->slug) }}" class="block">
-                            <h3 class="text-[17px] font-bold text-slate-900 dark:text-white mb-1.5 leading-snug group-hover:text-sn-600 dark:group-hover:text-sn-300 transition-colors">
-                                {{ $note->title }}
-                            </h3>
-                            <p class="text-[14px] text-slate-500 leading-relaxed line-clamp-2">
-                                {!! strip_tags($note->content) !!}
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-slate-900 dark:text-white">
+                            Learn smarter with
+                            <span class="bg-gradient-to-r from-[#5C919A] to-[#7BA8AF] bg-clip-text text-transparent">
+                                premium study notes
+                            </span>
+                        </h1>
+
+                        <p class="text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400 max-w-2xl">
+                            Discover summaries, lecture notes, exam prep material, and curated resources shared by top-performing students worldwide.
+                        </p>
+                    </div>
+
+                    {{-- Stats --}}
+                    <div class="grid gap-4 sm:grid-cols-2">
+
+                        <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-[#111827]/70 backdrop-blur-xl p-5 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-500">
+                                        Active notes
+                                    </p>
+
+                                    <p class="mt-3 text-4xl font-black text-slate-900 dark:text-white">
+                                        {{ number_format($notes->total()) }}
+                                    </p>
+                                </div>
+
+                                <div class="w-14 h-14 rounded-2xl bg-[#5C919A]/10 flex items-center justify-center">
+                                    <span class="material-symbols-rounded text-[#5C919A] text-[28px]">
+                                        auto_stories
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+                                Fresh study material uploaded daily by the community.
                             </p>
-                        </a>
-                    </div>
-
-                    {{-- Action bar --}}
-                    <div class="px-5 pb-3 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-3">
-                        <button class="feed-action-btn">
-                            <span class="material-symbols-rounded text-[18px]">chat_bubble_outline</span>
-                            {{ number_format($note->comments_count) }}
-                        </button>
-                        <button class="feed-action-btn hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20">
-                            <span class="material-symbols-rounded text-[18px]">repeat</span>
-                            0
-                        </button>
-                        <button class="feed-action-btn hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20">
-                            <span class="material-symbols-rounded text-[18px]">favorite_border</span>
-                            {{ number_format($note->likes_count) }}
-                        </button>
-                        <button class="feed-action-btn hover:text-sn-600">
-                            <span class="material-symbols-rounded text-[18px]">bar_chart</span>
-                            {{ number_format($note->views_count) }}
-                        </button>
-                        <div class="flex items-center gap-1">
-                            <button class="feed-action-btn">
-                                <span class="material-symbols-rounded text-[18px]">bookmark_border</span>
-                            </button>
                         </div>
+
+                        <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-[#111827]/70 backdrop-blur-xl p-5 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs uppercase tracking-[0.24em] text-slate-400 dark:text-slate-500">
+                                        Community picks
+                                    </p>
+
+                                    <p class="mt-3 text-4xl font-black text-slate-900 dark:text-white">
+                                        {{ count($suggestedUsers) + count($trendingCategories) }}
+                                    </p>
+                                </div>
+
+                                <div class="w-14 h-14 rounded-2xl bg-[#5C919A]/10 flex items-center justify-center">
+                                    <span class="material-symbols-rounded text-[#5C919A] text-[28px]">
+                                        groups
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+                                Trending creators, categories and collaborative spaces.
+                            </p>
+                        </div>
+
                     </div>
-                </article>
-            @empty
-                <div class="card-p text-center py-12">
-                    <span class="material-symbols-rounded text-[48px] text-slate-300">feed</span>
-                    <p class="text-slate-500 mt-2">No notes in this feed yet.</p>
-                </div>
-            @endforelse
 
-            <div class="mt-4">
-                {{ $notes->links() }}
-            </div>
-        </div>
-    </div>
+                    {{-- Search --}}
+                    <form action="{{ route('search') }}" method="GET" class="relative max-w-3xl">
 
-    {{-- ── RIGHT SIDEBAR ─────────────────────────────────────── --}}
-    <aside class="hidden lg:flex flex-col gap-4 w-[320px] flex-shrink-0">
+                        <div class="relative overflow-hidden rounded-[1.8rem] border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0d1117]/90 backdrop-blur-xl shadow-lg">
 
-        {{-- Quick Stats --}}
-        <div class="card-p">
-            <div class="flex items-center gap-3 mb-4">
-                <img src="{{ auth()->user()->profile_picture ? Storage::url(auth()->user()->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode(auth()->user()->name).'&background=BBD5DA&color=1A3A3E&size=64' }}"
-                     class="avatar-lg">
-                <div>
-                    <p class="font-semibold text-slate-900 dark:text-white text-[15px]">{{ auth()->user()->name }}</p>
-                    <p class="text-sm text-slate-400">@{{ auth()->user()->username }}</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-3 gap-3 text-center" x-data="{ 
-                followingCount: {{ auth()->user()->following()->count() }},
-                followersCount: {{ auth()->user()->followers()->count() }}
-            }" @follow-updated.window="if ($event.detail.userId === {{ auth()->id() }}) followersCount = $event.detail.followersCount; if ($event.detail.isFollowing !== undefined) { /* update following count if needed */ }">
-                <a href="{{ route('notes.index') }}" class="hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl p-2 transition-colors">
-                    <p class="text-lg font-bold text-slate-900 dark:text-white">{{ auth()->user()->notes()->count() }}</p>
-                    <p class="text-[11px] text-slate-400 font-medium">Notes</p>
-                </a>
-                <div class="hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl p-2 transition-colors cursor-pointer">
-                    <p class="text-lg font-bold text-slate-900 dark:text-white" x-text="followersCount">{{ auth()->user()->followers()->count() }}</p>
-                    <p class="text-[11px] text-slate-400 font-medium">Followers</p>
-                </div>
-                <div class="hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl p-2 transition-colors cursor-pointer">
-                    <p class="text-lg font-bold text-slate-900 dark:text-white" x-text="$store.followStore.following.length">{{ auth()->user()->following()->count() }}</p>
-                    <p class="text-[11px] text-slate-400 font-medium">Following</p>
-                </div>
-            </div>
-        </div>
+                            <span class="material-symbols-rounded absolute left-5 top-1/2 -translate-y-1/2 text-slate-400">
+                                search
+                            </span>
 
-        {{-- Trending Topics --}}
-        <div class="card-p">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="font-bold text-[15px] text-slate-900 dark:text-white">Trending Subjects</h3>
-            </div>
-            <div class="space-y-3">
-                @foreach($trendingCategories as $category)
-                <div class="flex items-start justify-between cursor-pointer group">
-                    <div>
-                        <p class="text-[14px] font-semibold text-slate-900 dark:text-white group-hover:text-sn-600 dark:group-hover:text-sn-300 transition-colors">{{ $category->icon }} {{ $category->name }}</p>
-                        <p class="text-[12px] text-slate-400">Popular subject</p>
+                            <input
+                                type="text"
+                                name="q"
+                                placeholder="Search notes, subjects, universities, professors..."
+                                class="w-full bg-transparent pl-14 pr-32 py-5 text-sm sm:text-base text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none"
+                                value="{{ request('q') }}"
+                            >
+
+                            <button
+                                type="submit"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 rounded-2xl bg-gradient-to-r from-[#5C919A] to-[#6FA4AC] px-5 py-3 text-sm font-semibold text-white shadow-lg hover:scale-[1.02] transition-all duration-300"
+                            >
+                                Search
+                            </button>
+
+                        </div>
+                    </form>
+
+                    {{-- Trending Categories --}}
+                    <div class="flex flex-wrap gap-3">
+                        @foreach($trendingCategories as $category)
+                            <a href="{{ route('search', ['q' => $category->name]) }}"
+                               class="inline-flex items-center gap-2 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-white/5 backdrop-blur-xl px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:scale-[1.03] hover:shadow-lg transition-all duration-300">
+
+                                <span>{{ $category->icon }}</span>
+                                <span>{{ $category->name }}</span>
+
+                            </a>
+                        @endforeach
                     </div>
-                    <span class="material-symbols-rounded text-[16px] text-slate-300 group-hover:text-sn-400 mt-1 transition-colors">trending_up</span>
-                </div>
-                @endforeach
-            </div>
-        </div>
 
-        {{-- Who to Follow --}}
-        <div class="card-p">
-            <div class="flex items-center justify-between mb-3">
-                <h3 class="font-bold text-[15px] text-slate-900 dark:text-white">Who to Follow</h3>
-            </div>
-            <div class="space-y-4">
-                @foreach($suggestedUsers as $suggested)
-                <div class="flex items-center gap-3">
-                    <a href="{{ route('profile.show', $suggested->username) }}">
-                        <img src="{{ $suggested->profile_picture ? Storage::url($suggested->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode($suggested->name).'&background=DFF1F1&color=1A3A3E&size=64' }}"
-                             class="avatar-sm flex-shrink-0">
-                    </a>
-                    <div class="flex-1 min-w-0">
-                        <a href="{{ route('profile.show', $suggested->username) }}" class="text-[14px] font-semibold text-slate-900 dark:text-white truncate leading-tight hover:underline block">
-                            {{ $suggested->name }}
-                        </a>
-                        <p class="text-[12px] text-slate-400 truncate">{{ '@' . $suggested->username }}</p>
+                </div>
+
+                {{-- Right Panel --}}
+                <div class="relative">
+
+                    <div class="rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-[#111827]/70 backdrop-blur-2xl p-6 shadow-xl">
+
+                        {{-- Featured Creators --}}
+                        <div>
+                            <div class="flex items-center justify-between mb-5">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">
+                                        Featured creators
+                                    </h3>
+
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                        Follow top students and unlock premium notes.
+                                    </p>
+                                </div>
+
+                                <div class="w-12 h-12 rounded-2xl bg-[#5C919A]/10 flex items-center justify-center">
+                                    <span class="material-symbols-rounded text-[#5C919A]">
+                                        workspace_premium
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+
+                                @foreach($suggestedUsers as $suggested)
+
+                                    <a href="{{ route('profile.show', $suggested->username) }}"
+                                       class="group flex items-center gap-3 rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-[#0d1117]/80 p-4 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+
+                                        <div class="relative">
+
+                                            <img
+                                                src="{{ $suggested->profile_picture ? Storage::url($suggested->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode($suggested->name).'&background=DFF1F1&color=1A3A3E&size=64' }}"
+                                                class="w-14 h-14 rounded-2xl object-cover ring-2 ring-white dark:ring-slate-900 shadow-lg"
+                                            >
+
+                                            <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900"></span>
+
+                                        </div>
+
+                                        <div class="min-w-0 flex-1">
+                                            <p class="font-bold text-slate-900 dark:text-white truncate">
+                                                {{ $suggested->name }}
+                                            </p>
+
+                                            <p class="text-sm text-slate-500 dark:text-slate-400 truncate">
+                                                {{ '@' . $suggested->username }}
+                                            </p>
+                                        </div>
+
+                                        <span class="material-symbols-rounded text-slate-300 group-hover:text-[#5C919A] transition">
+                                            arrow_forward
+                                        </span>
+
+                                    </a>
+
+                                @endforeach
+
+                            </div>
+                        </div>
+
                     </div>
-                    <x-follow-button :userId="$suggested->id" />
+
                 </div>
-                @endforeach
+
             </div>
         </div>
-
-        {{-- Footer links --}}
-        <div class="text-[11px] text-slate-400 leading-relaxed px-1">
-            <div class="flex flex-wrap gap-x-3 gap-y-1 mb-1">
-                <a href="#" class="hover:underline">Terms</a>
-                <a href="#" class="hover:underline">Privacy</a>
-                <a href="#" class="hover:underline">Cookies</a>
-                <a href="#" class="hover:underline">Help</a>
-            </div>
-            <p>&copy; {{ date('Y') }} ShareNote, Inc.</p>
-        </div>
-    </aside>
-
+    </section>
 </div>
 @endsection

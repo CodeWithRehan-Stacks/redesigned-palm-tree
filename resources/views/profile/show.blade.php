@@ -26,25 +26,46 @@
              followingCount: {{ $user->following_count }}
         }" 
              @follow-updated.window="if ($event.detail.userId === {{ $user->id }}) followersCount = $event.detail.followersCount">
-            {{-- Avatar + Actions --}}
-            <div class="flex items-end justify-between -mt-10 mb-4">
-                <div class="p-1 bg-white dark:bg-[#0d1117] rounded-2xl shadow-sm">
-                    <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=BBD5DA&color=1A3A3E&size=128' }}"
-                         class="w-20 h-20 rounded-xl object-cover" alt="{{ $user->name }}">
-                </div>
-                <div class="mt-10 flex items-center gap-2">
-                    @auth
-                        @if(auth()->id() === $user->id)
-                            <a href="{{ route('profile.edit') }}" class="btn-secondary text-sm py-2 px-4 rounded-xl">
-                                <span class="material-symbols-rounded text-[16px]">edit</span>
-                                Edit Profile
-                            </a>
-                        @else
-                            <x-follow-button :userId="$user->id" variant="profile" />
-                        @endif
-                    @endauth
-                </div>
-            </div>
+          {{-- Avatar + Actions --}}
+<div class="flex items-end justify-between -mt-16 mb-5 relative z-10">
+
+    {{-- Profile Picture --}}
+    <div class="relative group">
+
+        {{-- Glow Effect --}}
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-sn-400/40 to-sn-600/40 blur-xl scale-110 opacity-70 group-hover:opacity-100 transition duration-500"></div>
+
+        {{-- Avatar Container --}}
+        <div class="relative p-1.5 bg-white/90 dark:bg-[#0d1117]/90 backdrop-blur-xl rounded-3xl border border-white/40 dark:border-white/10 shadow-2xl">
+
+            <img 
+                src="{{ $user->profile_picture 
+                    ? Storage::url($user->profile_picture) 
+                    : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=BBD5DA&color=1A3A3E&size=256' }}"
+                class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover ring-4 ring-white dark:ring-[#0d1117] shadow-xl transition duration-300 group-hover:scale-[1.03]"
+                alt="{{ $user->name }}"
+            >
+
+            {{-- Online Dot --}}
+            <div class="absolute bottom-3 right-3 w-5 h-5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#0d1117] shadow-md"></div>
+        </div>
+    </div>
+
+    {{-- Action Buttons --}}
+    <div class="mt-14 flex items-center gap-2">
+        @auth
+            @if(auth()->id() === $user->id)
+                <a href="{{ route('profile.edit') }}"
+                   class="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-slate-700 hover:border-sn-400 dark:hover:border-sn-500 text-slate-700 dark:text-white text-sm font-semibold py-2.5 px-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                    <span class="material-symbols-rounded text-[18px]">edit</span>
+                    Edit Profile
+                </a>
+            @else
+                <x-follow-button :userId="$user->id" variant="profile" />
+            @endif
+        @endauth
+    </div>
+</div>
 
             {{-- Name & Identity --}}
             <div class="mb-3">
@@ -100,7 +121,7 @@
                 <div class="flex items-center gap-5 text-sm">
                     <button @click="showModal('following')" class="hover:underline">
                         <span class="font-bold text-slate-900 dark:text-white" 
-                              x-text="{{ auth()->id() === $user->id ? '$store.followStore.following.length' : 'followingCount' }}">
+                              x-text="{{ auth()->id() === $user->id ? '$store.followStore.following.length' : followingCount }}">
                             {{ number_format($user->following_count) }}
                         </span>
                         <span class="text-slate-400 ml-1">Following</span>

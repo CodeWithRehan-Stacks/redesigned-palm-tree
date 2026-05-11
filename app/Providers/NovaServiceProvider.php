@@ -59,13 +59,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 ])->icon('sparkles')->collapsable(),
             ];
         });
-
-                MenuSection::make('Analytics & Logs', [
-                    MenuItem::resource(\App\Nova\Download::class),
-                    MenuItem::resource(\App\Nova\Report::class),
-                ])->icon('chart-bar')->collapsable(),
-            ];
-        });
     }
 
     /**

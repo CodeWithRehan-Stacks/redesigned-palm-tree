@@ -75,15 +75,6 @@
                 <span class="material-symbols-rounded text-[20px]" style="{{ request()->routeIs('explore') ? 'font-variation-settings: \'FILL\' 1' : '' }}">explore</span>
                 Discover
             </a>
-
-            @if(auth()->user()->role === 'admin')
-                <p class="section-label mt-4 mb-1">Admin</p>
-                <a href="{{ route('admin.dashboard') }}"
-                   class="sidebar-link {{ request()->routeIs('admin.*') ? 'active' : '' }}">
-                    <span class="material-symbols-rounded text-[20px]" style="{{ request()->routeIs('admin.*') ? 'font-variation-settings: \'FILL\' 1' : '' }}">admin_panel_settings</span>
-                    Admin Panel
-                </a>
-            @endif
         </nav>
 
         <!-- Bottom Profile Strip (compact) -->
@@ -94,7 +85,7 @@
                      class="w-8 h-8 rounded-full border border-slate-200 dark:border-slate-700 object-cover flex-shrink-0" alt="">
                 <div class="flex-1 overflow-hidden">
                     <p class="text-[13px] font-semibold text-slate-900 dark:text-white truncate leading-tight">{{ auth()->user()->name }}</p>
-                    <p class="text-[12px] text-slate-400 truncate leading-tight">@{{ auth()->user()->username }}</p>
+                    <p class="text-[12px] text-slate-400 truncate leading-tight">{{ '@' . auth()->user()->username }}</p>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

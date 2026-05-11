@@ -36,7 +36,7 @@
             @include('layouts.navbar')
 
             <!-- Page Content -->
-            <main class="flex-1 px-4 py-6 sm:px-6 lg:px-8 max-w-[80rem] mx-auto w-full fade-in">
+            <main class="flex-1 px-4 pt-24 pb-6 sm:px-6 lg:px-8 max-w-[80rem] mx-auto w-full fade-in md:pt-6">
                 <!-- Flash messages -->
                 @if(session('success'))
                     <div class="mb-6 flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-3 text-sm font-medium dark:bg-emerald-900/20 dark:border-emerald-800 dark:text-emerald-400" role="alert">

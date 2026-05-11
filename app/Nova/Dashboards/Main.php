@@ -13,7 +13,6 @@ use App\Nova\Metrics\TotalDownloads;
 use App\Nova\Metrics\TotalRevenue;
 use App\Nova\Metrics\TrendingTopics;
 use Laravel\Nova\Card;
-use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
 class Main extends Dashboard
@@ -44,8 +43,6 @@ class Main extends Dashboard
             // Activity Feed
             (new ActivityFeed)->width('full'),
 
-            // Help and Information
-            new Help,
         ];
     }
 }
