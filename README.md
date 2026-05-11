@@ -1,104 +1,258 @@
 # 📚 ShareNote
 
-![ShareNote Hero Banner](sharenote_hero_banner.png)
+<div align="center">
 
-## 🌟 Overview
+<img src="public/images/sharenote_hero_banner.png" alt="ShareNote Hero Banner" width="100%" height="420"/>
 
-**ShareNote** is a premium, full-stack social learning platform designed for the modern academic ecosystem. It empowers students and educators to share knowledge, collaborate on notes, and build a vibrant learning community through a sleek, high-performance interface.
+<br><br>
 
-Built with a focus on **productivity and connectivity**, ShareNote combines the power of Laravel with a stunning glassmorphism design system to provide an unparalleled user experience.
+![Laravel](https://img.shields.io/badge/Laravel-13-red?style=for-the-badge&logo=laravel)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38BDF8?style=for-the-badge&logo=tailwindcss)
+![Nova](https://img.shields.io/badge/Laravel_Nova-5-252525?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
----
+### 🚀 Premium Social Learning Platform for Modern Students
 
-## ✨ Key Features
+Create, share, discover, and collaborate on study notes with a beautiful next-generation academic experience.
 
-### 🔍 Intelligent Discovery
-- **Explore Page:** Discover trending notes based on a custom-weighted algorithm.
-- **Subject Categorization:** Navigate through academic disciplines with ease.
-- **Top Contributors:** Connect with the most influential note-sharers on the platform.
-
-### 📝 Note Ecosystem
-- **Rich Note Management:** Create and edit detailed academic notes with support for multiple file attachments.
-- **Collaborative Raises:** Engage in "Note Raises"—a unique discussion and reposting system for deepening academic dialogue.
-- **Smart Search:** Find exactly what you need with an optimized search engine for notes and users.
-
-### 👥 Social & Community
-- **Interactive Profiles:** Showcase your contributions and track your academic influence.
-- **Engagement Tools:** Like, comment, and save notes for offline study.
-- **Follow System:** Build your network by following fellow learners and educators.
-
-### 🛠 Administrative Control (Laravel Nova)
-- **Customized Dashboard:** Real-time platform analytics with value metrics for New Users and New Notes.
-- **Resource Management:** Full CRUD capabilities for Users, Notes, Categories, and Raises with optimized search and filters.
-- **Community Moderation:** Robust system for handling content reports and ensuring community safety.
-- **Branded Interface:** Fully customized admin UI with ShareNote branding, custom sidebar, and optimized navigation.
+</div>
 
 ---
 
-## 🚀 Tech Stack
+# 🌟 Overview
 
-- **Backend:** [Laravel 13](https://laravel.com) (PHP 8.3+)
-- **Admin Panel:** [Laravel Nova 5](https://nova.laravel.com)
-- **Frontend:** Blade Templates, [Tailwind CSS 4.0](https://tailwindcss.com), Vite
-- **Database:** MySQL / SQLite
-- **Real-time:** Laravel Events & Notifications
-- **Testing:** [Pest PHP](https://pestphp.com)
+**ShareNote** is a premium full-stack social learning platform crafted for students, educators, and academic communities.
+
+It combines:
+
+- ⚡ Lightning-fast performance
+- 🎨 Modern glassmorphism UI
+- 👥 Community-driven collaboration
+- 📚 Smart note organization
+- 🔥 Social engagement features
+
+Built using **Laravel 13**, **Laravel Nova 5**, and **Tailwind CSS 4**, ShareNote delivers a polished and scalable experience for modern education platforms.
 
 ---
 
-## 🛠 Installation & Setup
+# ✨ Features
 
-Follow these steps to get your local development environment running:
+## 🔍 Intelligent Discovery
 
-### 1. Clone the Repository
+- Trending Explore Feed
+- Smart Search System
+- Subject-based Navigation
+- Top Contributor Rankings
+- Personalized Feed Experience
+
+---
+
+## 📝 Advanced Note System
+
+- Rich Text Note Editor
+- File & Document Attachments
+- Draft Auto Save
+- Public / Followers / Private Visibility
+- Categories & Tagging System
+- Note Raises & Discussions
+
+---
+
+## 👥 Community Features
+
+- User Profiles
+- Follow System
+- Likes & Saves
+- Comments & Discussions
+- Activity Feed
+- Academic Networking
+
+---
+
+## 🛡 Admin Dashboard (Laravel Nova)
+
+- Advanced Analytics
+- User Management
+- Notes Moderation
+- Category Management
+- Community Reports
+- Custom ShareNote Branding
+
+---
+
+# 🖼 UI Highlights
+
+- ✨ Glassmorphism Design
+- 🌙 Full Dark Mode Support
+- 📱 Mobile-First Responsive Layout
+- ⚡ Smooth Animations
+- 🎯 Premium Dashboard Experience
+- 🧠 Productivity-focused Interface
+
+---
+
+# 🚀 Tech Stack
+
+| Technology | Usage |
+|---|---|
+| Laravel 13 | Backend Framework |
+| Laravel Nova 5 | Admin Panel |
+| Tailwind CSS 4 | Styling |
+| Blade Templates | Frontend |
+| Alpine.js | UI Interactions |
+| MySQL / SQLite | Database |
+| Vite | Frontend Build Tool |
+| Pest PHP | Testing |
+
+---
+
+# 📦 Installation
+
+## 1️⃣ Clone Repository
+
 ```bash
 git clone https://github.com/CodeWithRehan-Stacks/redesigned-palm-tree.git
+
 cd ShareNote-app
 ```
 
-### 2. Install Dependencies
+---
+
+## 2️⃣ Install Dependencies
+
 ```bash
 composer install
+
 npm install
 ```
 
-### 3. Environment Configuration
+---
+
+## 3️⃣ Configure Environment
+
 ```bash
 cp .env.example .env
 ```
-*Update `.env` with your database and application credentials.*
 
-### 4. Application Setup
-```bash
-php artisan key:generate
-php artisan migrate --seed
-php artisan nova:install
-```
-*Note: Laravel Nova requires a valid license key configured in your `auth.json` or environment.*
+Update your `.env` file with:
 
-### 5. Start Development Server
-```bash
-npm run dev
-```
-*This will start both the Vite dev server and the Laravel application.*
+- Database credentials
+- App URL
+- Mail configuration
+- Nova license setup
 
 ---
 
-## 🧪 Testing
+## 4️⃣ Generate App Key
 
-Run the test suite using Pest:
+```bash
+php artisan key:generate
+```
+
+---
+
+## 5️⃣ Run Migrations & Seeders
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+## 6️⃣ Install Laravel Nova
+
+```bash
+php artisan nova:install
+```
+
+> Laravel Nova requires a valid license.
+
+---
+
+## 7️⃣ Start Development Server
+
+```bash
+npm run dev
+```
+
+Then run:
+
+```bash
+php artisan serve
+```
+
+---
+
+# 🧪 Testing
+
+Run all tests:
+
 ```bash
 php artisan test
 ```
 
 ---
 
-## 📄 License
+# 📂 Project Structure
 
-The ShareNote application is open-sourced software licensed under the [MIT license](LICENSE).
+```bash
+app/
+resources/
+routes/
+database/
+public/
+storage/
+```
 
 ---
 
-<p align="center">
-  Built with ❤️ for the academic community.
-</p>
+# 🔐 Authentication Features
+
+- Secure Authentication
+- Profile Management
+- Follow System
+- Session Protection
+- CSRF Protection
+
+---
+
+# 📈 Future Roadmap
+
+- AI Study Assistant
+- Real-time Collaboration
+- Live Messaging
+- Mobile App
+- Study Groups
+- Flashcards System
+- PDF Annotation Tools
+- Gamification & XP
+
+---
+
+# 🤝 Contributing
+
+Pull requests are welcome.
+
+For major changes:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+<div align="center">
+
+### 💙 Built for students, creators, and learners worldwide.
+
+**ShareNote © 2026**
+
+</div>
