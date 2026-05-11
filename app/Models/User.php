@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
     protected $fillable = [
         'name',
@@ -29,7 +30,12 @@ class User extends Authenticatable
         'subjects', 
         'social_links',
         'role',
-        'is_private'
+        'is_private',
+        'university_id',
+        'earnings',
+        'is_verified',
+        'subscription_status',
+        'subscription_expires_at'
     ];
 
     protected $hidden = [
@@ -44,6 +50,8 @@ class User extends Authenticatable
         'subjects' => 'array',
         'social_links' => 'array',
         'is_private' => 'boolean',
+        'is_verified' => 'boolean',
+        'subscription_expires_at' => 'datetime',
     ];
 
     public function notes()
@@ -101,4 +109,9 @@ class User extends Authenticatable
     {
         return $this->following()->pluck('following_id');
     }
+
+    public function university() { return $this->belongsTo(University::class); }
+    public function transactions() { return $this->hasMany(Transaction::class); }
+    public function payoutRequests() { return $this->hasMany(PayoutRequest::class); }
+    public function downloads() { return $this->hasMany(Download::class); }
 }

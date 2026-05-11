@@ -27,15 +27,18 @@ Built with a focus on **productivity and connectivity**, ShareNote combines the 
 - **Engagement Tools:** Like, comment, and save notes for offline study.
 - **Follow System:** Build your network by following fellow learners and educators.
 
-### 🛠 Administrative Control
-- **Comprehensive Dashboard:** Real-time platform analytics, system health monitoring, and user moderation tools.
-- **Report Management:** Robust system for handling content reports and ensuring community safety.
+### 🛠 Administrative Control (Laravel Nova)
+- **Customized Dashboard:** Real-time platform analytics with value metrics for New Users and New Notes.
+- **Resource Management:** Full CRUD capabilities for Users, Notes, Categories, and Raises with optimized search and filters.
+- **Community Moderation:** Robust system for handling content reports and ensuring community safety.
+- **Branded Interface:** Fully customized admin UI with ShareNote branding, custom sidebar, and optimized navigation.
 
 ---
 
 ## 🚀 Tech Stack
 
 - **Backend:** [Laravel 13](https://laravel.com) (PHP 8.3+)
+- **Admin Panel:** [Laravel Nova 5](https://nova.laravel.com)
 - **Frontend:** Blade Templates, [Tailwind CSS 4.0](https://tailwindcss.com), Vite
 - **Database:** MySQL / SQLite
 - **Real-time:** Laravel Events & Notifications
@@ -69,7 +72,9 @@ cp .env.example .env
 ```bash
 php artisan key:generate
 php artisan migrate --seed
+php artisan nova:install
 ```
+*Note: Laravel Nova requires a valid license key configured in your `auth.json` or environment.*
 
 ### 5. Start Development Server
 ```bash

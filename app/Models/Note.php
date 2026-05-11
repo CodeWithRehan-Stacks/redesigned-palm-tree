@@ -21,6 +21,13 @@ class Note extends Model
         'views_count',
         'likes_count',
         'saves_count',
+        'university_id',
+        'subject_id',
+        'status',
+        'ai_score',
+        'is_premium',
+        'downloads_count',
+        'moderator_notes'
     ];
 
     public function user()
@@ -79,4 +86,7 @@ class Note extends Model
 
         return $score;
     }
+    public function university() { return $this->belongsTo(University::class); }
+    public function subject() { return $this->belongsTo(Subject::class); }
+    public function downloads() { return $this->hasMany(Download::class); }
 }
