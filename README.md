@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="public/images/sharenote_hero_banner.png" alt="ShareNote Hero Banner" width="100%" height="420"/>
+<img src="public/img/logo.png" alt="ShareNote Hero Banner" width="420" height="420"/>
 
 <br><br>
 
