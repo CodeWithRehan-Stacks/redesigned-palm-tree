@@ -25,23 +25,18 @@ class Main extends Dashboard
     public function cards(): array
     {
         return [
-            // Top Row - Key Metrics
-            (new TotalRevenue)->width('1/3'),
             (new TotalDownloads)->width('1/3'),
             (new ActiveUsersNow)->width('1/3'),
             (new PendingApprovals)->width('1/3'),
 
             // Second Row - Trends and Analytics
             (new RevenueTrend)->width('1/3'),
-            (new TrendingTopics)->width('1/3'),
 
             // Third Row - Distribution and Insights
             (new CategoryDistribution)->width('1/3'),
             (new NewNotes)->width('1/3'),
             (new NewUsers)->width('1/3'),
 
-            // Activity Feed
-            (new ActivityFeed)->width('full'),
 
         ];
     }

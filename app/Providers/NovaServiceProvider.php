@@ -31,12 +31,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return [
                 MenuSection::dashboard(\App\Nova\Dashboards\Main::class)->icon('chart-bar'),
 
-                MenuSection::make('📊 Analytics & Insights', [
+                MenuSection::make('Analytics & Insights', [
                     MenuItem::resource(\App\Nova\Download::class),
                     MenuItem::resource(\App\Nova\Report::class),
                 ])->icon('chart-bar')->collapsable(),
 
-                MenuSection::make('📝 Content Management', [
+                MenuSection::make('Content Management', [
                     MenuItem::resource(\App\Nova\Note::class),
                     MenuItem::resource(\App\Nova\Category::class),
                     MenuItem::resource(\App\Nova\Subject::class),
@@ -44,17 +44,17 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     MenuItem::resource(\App\Nova\Tag::class),
                 ])->icon('document-text')->collapsable(),
 
-                MenuSection::make('👥 Users & Community', [
+                MenuSection::make('Users & Community', [
                     MenuItem::resource(\App\Nova\User::class),
                     MenuItem::resource(\App\Nova\PayoutRequest::class),
                 ])->icon('users')->collapsable(),
 
-                MenuSection::make('💰 Monetization', [
+                MenuSection::make('Monetization', [
                     MenuItem::resource(\App\Nova\Plan::class),
                     MenuItem::resource(\App\Nova\Transaction::class),
                 ])->icon('cash')->collapsable(),
 
-                MenuSection::make('🚀 Community Features', [
+                MenuSection::make('Community Features', [
                     MenuItem::resource(\App\Nova\Raise::class),
                 ])->icon('sparkles')->collapsable(),
             ];
