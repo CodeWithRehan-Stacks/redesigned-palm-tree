@@ -2,7 +2,10 @@
 
 <div align="center">
 
-<img src="public/img/logo.png" alt="ShareNote Hero Banner" width="420" height="420"/>
+ <div class="w-8 h-8 bg-sn-300 rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-rounded text-[18px] text-sn-900" style="font-variation-settings: 'FILL' 1">auto_stories</span>
+                </div>
+                <span class="text-[17px] font-bold text-slate-900 dark:text-white tracking-tight">ShareNote</span>
 
 <br><br>
 
